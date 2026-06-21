@@ -2,28 +2,19 @@
 import requests
 from fpdf import FPDF
 import os
-
 # --- إعدادات التليجرام (ضع بياناتك هنا) ---
-TELEGRAM_TOKEN = "ضع_التوكين_هنا"
-CHAT_ID = "ضع_التشات_ايدي_هنا"
-
+TELEGRAM_TOKEN = "8640762406:AAF540rnfipL54HSUIRZqODSsBcQjM2uybo"
+CHAT_ID = "7055252264ا"
 def send_telegram_msg(msg):
     url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
     requests.post(url, data={"chat_id": CHAT_ID, "text": msg})
-
 def send_telegram_photo(photo_path, caption):
     url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendPhoto"
     with open(photo_path, 'rb') as photo:
         requests.post(url, data={"chat_id": CHAT_ID, "caption": caption}, files={"photo": photo})
-
-# --- إعدادات الصفحة ---
-st.set_page_config(page_title="متجر توفيق للخدمات", layout="centered")
-
-# --- الواجهة ---
+st.set_page_config(page_title=" متجر توفيق للخدمات ", layout="centered")
 st.markdown("<h1 style='text-align: center; color: #2E86C1;'>مرحبا بك في متجرك</h1>", unsafe_allow_html=True)
 st.markdown("<p style='text-align: center; font-size: 18px;'>معا لنطور التجارة في مدينتنا</p>", unsafe_allow_html=True)
-
-# --- نموذج الطلب ---
 with st.form("main_form", clear_on_submit=True):
     col1, col2 = st.columns(2)
     with col1:
