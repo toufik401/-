@@ -18,7 +18,10 @@ def send_telegram_photo(photo_path, caption):
 
 st.set_page_config(page_title="متجر توفيق للخدمات", layout="centered")
 
+# --- واجهة المتجر ---
 st.markdown("<h1 style='text-align: center; color: #2E86C1;'>مرحبا بك في متجرك</h1>", unsafe_allow_html=True)
+st.markdown("<h3 style='text-align: center; color: #555;'>معاً لنطور التجارة في مدينتنا</h3>", unsafe_allow_html=True)
+st.write("---")
 
 with st.form("main_form", clear_on_submit=True):
     col1, col2 = st.columns(2)
@@ -58,18 +61,20 @@ with st.form("main_form", clear_on_submit=True):
                         f.write(uploaded_file.getbuffer())
                     send_telegram_photo("receipt.jpg", f"إيصال دفع من {name}")
                 
-                # إنشاء الفاتورة
+                # --- إنشاء الفاتورة بالفرنسية لتجنب الخطأ ---
                 pdf = FPDF()
                 pdf.add_page()
                 pdf.set_font("Arial", 'B', 16)
-                pdf.cell(200, 10, txt="Facture - Tawfiq Dev", ln=True, align='C')
+                pdf.cell(200, 10, txt="Facture de Commande", ln=True, align='C')
                 pdf.set_font("Arial", size=12)
-                pdf.cell(200, 10, txt=f"Client: {name} | Tel: {phone}", ln=True)
+                pdf.cell(200, 10, txt=f"Client: {name}", ln=True)
+                pdf.cell(200, 10, txt=f"Tel: {phone}", ln=True)
                 pdf.cell(200, 10, txt=f"Service: {trade_type}", ln=True)
                 pdf.output("invoice.pdf")
                 
                 # إظهار الفقاعات
                 st.balloons()
+                
                 st.success("تم إرسال طلبك بنجاح! شكراً لثقتكم.")
                 with open("invoice.pdf", "rb") as f:
-                    st.download_button("تحميل الفاتورة", f, file_name="invoice.pdf")
+                    st.download_button("تحميل الفاتورة (PDF)", f, file_name="invoice.pdf")
