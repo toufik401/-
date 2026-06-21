@@ -1,6 +1,7 @@
 import streamlit as st
 import requests
 import os
+
 # --- إعدادات التليجرام ---
 TELEGRAM_TOKEN = "8640762406:AAF540rnfipL54HSUIRZqODSsBcQjM2uybo"
 CHAT_ID = "7055252264"
@@ -16,7 +17,6 @@ def send_telegram_photo(photo_path, caption):
 
 st.set_page_config(page_title="متجر توفيق للخدمات", layout="centered")
 
-# --- واجهة المتجر ---
 st.markdown("<h1 style='text-align: center; color: #2E86C1;'>مرحبا بك في متجرك</h1>", unsafe_allow_html=True)
 st.markdown("<h3 style='text-align: center; color: #555;'>معاً لنطور التجارة في مدينتنا</h3>", unsafe_allow_html=True)
 st.write("---")
@@ -26,12 +26,13 @@ with st.form("main_form", clear_on_submit=True):
     with col1:
         name = st.text_input("الاسم الكريم")
         phone = st.text_input("رقم الهاتف")
-        insta = st.text_input("حساب الإنستغرام (اجباري من اجل تواصل واخذ تفاصيل متجرك)")
+        insta = st.text_input("حساب الإنستغرام (اختياري)")
     with col2:
         wilaya = st.text_input("الولاية")
-        trade_type = st.selectbox("نوع نشاطك", ["مواد غذائية", "حلويات ومملحات", "ألبسة" ])
+        trade_type = st.selectbox("نوع نشاطك", ["مواد غذائية", "حلويات ومملحات", "ألبسة", "أخرى"])
     
     payment_method = st.radio("وسيلة الدفع", ["بريدي موب (BaridiMob)", "الدفع عند الاستلام"])
+    
     uploaded_file = None
     if payment_method == "بريدي موب (BaridiMob)":
         st.info("💡 قم بالتحويل إلى RIP: 007999999999999999 50")
@@ -58,20 +59,6 @@ with st.form("main_form", clear_on_submit=True):
                         f.write(uploaded_file.getbuffer())
                     send_telegram_photo("receipt.jpg", f"إيصال دفع من {name}")
                 
-                # --- إنشاء الفاتورة بالفرنسية لتجنب الخطأ ---
-                pdf = FPDF()
-                pdf.add_page()
-                pdf.set_font("Arial", 'B', 16)
-                pdf.cell(200, 10, txt="Facture de Commande", ln=True, align='C')
-                pdf.set_font("Arial", size=12)
-                pdf.cell(200, 10, txt=f"Client: {name}", ln=True)
-                pdf.cell(200, 10, txt=f"Tel: {phone}", ln=True)
-                pdf.cell(200, 10, txt=f"Service: {trade_type}", ln=True)
-                pdf.output("invoice.pdf")
-                
-                # إظهار الفقاعات
+                # الفقاعات عند النجاح
                 st.balloons()
-                
                 st.success("تم إرسال طلبك بنجاح! شكراً لثقتكم.")
-                with open("invoice.pdf", "rb") as f:
-                    st.download_button("تحميل الفاتورة (PDF)", f, file_name="invoice.pdf")
