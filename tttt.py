@@ -23,11 +23,13 @@ st.write("---")
 st.write("---")
 st.subheader("معرض المنتجات")
 
-# نقسمو الصفحة لـ 3 أعمدة باش الصور يجيوا مرتبين
-col_img1 = st.columns(3)
+# --- قسم عرض المنتجات (الصور) ---
+st.write("---")
+st.subheader("معرض المنتجات")
 
-with col_img1:
-    st.image("<a href="https://ibb.co/RpNf8gs4"><img src="https://i.ibb.co/27SxJFCY/IMG-20260621-230717-021.jpg" alt="IMG-20260621-230717-021" border="0"></a>", caption="منتج 1")
+# استخدم الرابط المباشر داخل st.image
+st.image("https://i.ibb.co/27SxJFCY/IMG-20260621-230717-021.jpg", caption="منتج 1", use_container_width=True)
+
 st.write("---")
 with st.form("main_form", clear_on_submit=True):
     col1, col2 = st.columns(2)
