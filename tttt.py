@@ -1,8 +1,6 @@
 import streamlit as st
 import requests
-from fpdf import FPDF
 import os
-
 # --- إعدادات التليجرام ---
 TELEGRAM_TOKEN = "8640762406:AAF540rnfipL54HSUIRZqODSsBcQjM2uybo"
 CHAT_ID = "7055252264"
