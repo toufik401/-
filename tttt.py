@@ -27,7 +27,7 @@ st.subheader("معرض المنتجات")
 col_img1, col_img2, col_img3 = st.columns(3)
 
 with col_img1:
-    st.image("IMG_20260621_230717_810.jpg", caption="منتج 1")
+    st.image("<a href="https://ibb.co/RpNf8gs4"><img src="https://i.ibb.co/27SxJFCY/IMG-20260621-230717-021.jpg" alt="IMG-20260621-230717-021" border="0"></a>", caption="منتج 1")
 st.write("---")
 with st.form("main_form", clear_on_submit=True):
     col1, col2 = st.columns(2)
