@@ -2,17 +2,24 @@ import streamlit as st
 import requests
 from fpdf import FPDF
 import os
-TELEGRAM_TOKEN = st.secrets "8640762406:AAF540rnfipL54HSUIRZqODSsBcQjM2uybo"
-CHAT_ID = st.secret"7055252264"
+
+# --- إعدادات التليجرام ---
+TELEGRAM_TOKEN = "8640762406:AAF540rnfipL54HSUIRZqODSsBcQjM2uybo"
+CHAT_ID = "7055252264"
+
 def send_telegram_msg(msg):
     url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
     requests.post(url, data={"chat_id": CHAT_ID, "text": msg})
+
 def send_telegram_photo(photo_path, caption):
     url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendPhoto"
     with open(photo_path, 'rb') as photo:
         requests.post(url, data={"chat_id": CHAT_ID, "caption": caption}, files={"photo": photo})
+
 st.set_page_config(page_title="متجر توفيق للخدمات", layout="centered")
+
 st.markdown("<h1 style='text-align: center; color: #2E86C1;'>مرحبا بك في متجرك</h1>", unsafe_allow_html=True)
+
 with st.form("main_form", clear_on_submit=True):
     col1, col2 = st.columns(2)
     with col1:
@@ -30,12 +37,11 @@ with st.form("main_form", clear_on_submit=True):
         st.info("💡 قم بالتحويل إلى RIP: 007999999999999999 50")
         uploaded_file = st.file_uploader("ارفع صورة إيصال الدفع", type=['jpg', 'png'])
     else:
-        st.success("سنتواصل معك عبر الهاتف لتأكيد الطلب والدفع عند الاستلام.")
+        st.success("سنتواصل معك لتأكيد الطلب والدفع عند الاستلام.")
 
     submit = st.form_submit_button("إطلاق المشروع")
 
     if submit:
-        # التحقق من البيانات
         if not name or not phone:
             st.error("يرجى ملء الاسم ورقم الهاتف!")
         elif payment_method == "بريدي موب (BaridiMob)" and uploaded_file is None:
@@ -62,8 +68,8 @@ with st.form("main_form", clear_on_submit=True):
                 pdf.cell(200, 10, txt=f"Service: {trade_type}", ln=True)
                 pdf.output("invoice.pdf")
                 
+                # إظهار الفقاعات
                 st.balloons()
-                st.success("تم إرسال طلبك بنجاح! وسنتواصل معك.")
+                st.success("تم إرسال طلبك بنجاح! شكراً لثقتكم.")
                 with open("invoice.pdf", "rb") as f:
                     st.download_button("تحميل الفاتورة", f, file_name="invoice.pdf")
-
