@@ -26,13 +26,12 @@ with st.form("main_form", clear_on_submit=True):
     with col1:
         name = st.text_input("الاسم الكريم")
         phone = st.text_input("رقم الهاتف")
-        insta = st.text_input("حساب الإنستغرام (اختياري)")
+        insta = st.text_input("حساب الإنستغرام (اجباري من اجل تواصل واخذ تفاصيل متجرك)")
     with col2:
         wilaya = st.text_input("الولاية")
-        trade_type = st.selectbox("نوع نشاطك", ["مواد غذائية", "حلويات ومملحات", "ألبسة", "أخرى"])
+        trade_type = st.selectbox("نوع نشاطك", ["مواد غذائية", "حلويات ومملحات", "ألبسة" ])
     
     payment_method = st.radio("وسيلة الدفع", ["بريدي موب (BaridiMob)", "الدفع عند الاستلام"])
-    
     uploaded_file = None
     if payment_method == "بريدي موب (BaridiMob)":
         st.info("💡 قم بالتحويل إلى RIP: 007999999999999999 50")
