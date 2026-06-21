@@ -4,7 +4,7 @@ from fpdf import FPDF
 import os
 # --- إعدادات التليجرام (ضع بياناتك هنا) ---
 TELEGRAM_TOKEN = "8640762406:AAF540rnfipL54HSUIRZqODSsBcQjM2uybo"
-CHAT_ID = "7055252264ا"
+CHAT_ID = "7055252264"
 def send_telegram_msg(msg):
     url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
     requests.post(url, data={"chat_id": CHAT_ID, "text": msg})
