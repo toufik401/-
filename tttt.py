@@ -20,7 +20,20 @@ st.set_page_config(page_title="متجر توفيق للخدمات", layout="cent
 st.markdown("<h1 style='text-align: center; color: #2E86C1;'>مرحبا بك في متجرك</h1>", unsafe_allow_html=True)
 st.markdown("<h3 style='text-align: center; color: #555;'>معاً لنطور التجارة في مدينتنا</h3>", unsafe_allow_html=True)
 st.write("---")
+st.write("---")
+st.subheader("معرض المنتجات")
 
+# نقسمو الصفحة لـ 3 أعمدة باش الصور يجيوا مرتبين
+col_img1, col_img2, col_img3 = st.columns(3)
+
+with col_img1:
+    st.image("IMG_20260621_230717_810.jpg", caption="منتج 1")
+with col_img2:
+    st.image("MG_20260621_230717_810.jpg", caption="منتج 2")
+with col_img3:
+    st.image("MG_20260621_230717_810.jpg", caption="منتج 3")
+
+st.write("---")
 with st.form("main_form", clear_on_submit=True):
     col1, col2 = st.columns(2)
     with col1:
