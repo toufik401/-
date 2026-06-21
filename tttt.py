@@ -28,11 +28,6 @@ col_img1, col_img2, col_img3 = st.columns(3)
 
 with col_img1:
     st.image("IMG_20260621_230717_810.jpg", caption="منتج 1")
-with col_img2:
-    st.image("MG_20260621_230717_810.jpg", caption="منتج 2")
-with col_img3:
-    st.image("MG_20260621_230717_810.jpg", caption="منتج 3")
-
 st.write("---")
 with st.form("main_form", clear_on_submit=True):
     col1, col2 = st.columns(2)
