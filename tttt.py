@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 from fpdf import FPDF
 import os
-TELEGRAM_TOKEN = st.secret"8640762406:AAF540rnfipL54HSUIRZqODSsBcQjM2uybo"
+TELEGRAM_TOKEN = invalid syntax"8640762406:AAF540rnfipL54HSUIRZqODSsBcQjM2uybo"
 CHAT_ID = st.secret"7055252264"
 def send_telegram_msg(msg):
     url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
