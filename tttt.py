@@ -1,7 +1,39 @@
 import streamlit as st
 import requests
 import os
+import streamlit as st
 
+# إعداد السلة (سلة التسوق)
+if 'cart' not in st.session_state:
+    st.session_state.cart = []
+if 'product_image' not in st.session_state:
+    st.session_state.product_image = None
+
+# --- واجهة الإدارة (للمشتري فقط) ---
+st.sidebar.title("🛠️ لوحة تحكم المدير")
+admin_pass = st.sidebar.text_input("كلمة السر", type="password")
+
+if admin_pass == "1234":
+    uploaded_file = st.sidebar.file_uploader("تغيير صورة المنتج", type=['jpg', 'png'])
+    if uploaded_file:
+        st.session_state.product_image = uploaded_file
+
+# --- واجهة المتجر ---
+st.title("🛒 متجر توفيق للخدمات")
+
+# عرض الصورة إذا كانت موجودة
+if st.session_state.product_image:
+    st.image(st.session_state.product_image, use_container_width=True)
+else:
+    st.info("المدير لم يرفع صورة المنتج بعد")
+
+# إضافة زر للسلة
+if st.button("أضف إلى السلة 🛍️"):
+    st.session_state.cart.append("منتج 1")
+    st.success("تمت الإضافة للسلة!")
+
+# عرض محتويات السلة
+st.write(f"عدد المنتجات في السلة: {len(st.session_state.cart)}")
 # --- إعدادات التليجرام ---
 TELEGRAM_TOKEN = "8640762406:AAF540rnfipL54HSUIRZqODSsBcQjM2uybo"
 CHAT_ID = "7055252264"
